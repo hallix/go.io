@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"cloud.google.com/go/firestore"
-	"github.com/hallix/go.io/types"
+	"github.com/hallix/go.io/pkg/types"
 )
 
 type repository[T any] struct{}
