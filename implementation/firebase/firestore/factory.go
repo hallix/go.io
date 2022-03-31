@@ -1,8 +1,7 @@
-package firebase
+package firestore
 
 import (
 	"context"
-	"fmt"
 
 	"cloud.google.com/go/firestore"
 	"github.com/hallix/go.io/types"
@@ -20,35 +19,11 @@ func CreateRepository[T any](appCxt context.Context, projectId, datastoreName st
 	client, err = firestore.NewClient(appCxt, projectId)
 
 	if err != nil {
-		fmt.Print(err)
-		panic(15)
+		panic(err)
 	}
 
 	collection = client.Collection(datastoreName)
 	cxt = &appCxt
 
 	return repository[T]{}
-}
-
-func (repo repository[T]) Save(element T) (err error) {
-
-	_, _, err = collection.Add(*cxt, element)
-
-	return err
-
-}
-
-func (repo repository[T]) GetById(id any, element *T) (data *T, err error) {
-
-	stringId := fmt.Sprint(id)
-
-	docSnapShot, err := collection.Doc(stringId).Get(*cxt)
-
-	if err != nil {
-		panic(err)
-	}
-
-	err = docSnapShot.DataTo(element)
-
-	return element, err
 }
