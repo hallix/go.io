@@ -30,11 +30,11 @@ func CreateRepository[T any](appCxt context.Context, projectId, datastoreName st
 	return repository[T]{}
 }
 
-func (repo repository[T]) Save(element T) {
+func (repo repository[T]) Save(element T) (err error) {
 
-	fmt.Print("address of:", element)
+	_, _, err = collection.Add(*cxt, element)
 
-	collection.Add(*cxt, element)
+	return err
 
 }
 
