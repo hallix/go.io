@@ -13,7 +13,7 @@ var client *firestore.Client
 var collection *firestore.CollectionRef
 var cxt *context.Context
 
-func CreateRepository[T any](appCxt context.Context, projectId, datastoreName string, entity T) types.Repository[T] {
+func CreateRepository[T any](appCxt context.Context, projectId, datastoreName string) types.Repository[T] {
 
 	var err error
 	client, err = firestore.NewClient(appCxt, projectId)
