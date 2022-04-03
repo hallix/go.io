@@ -37,13 +37,13 @@ import (
 
 var postRepository types.Repository[Post]
 
-func GetRepository(cxt context.Context) *types.Repository[Post] {
+func GetRepository(cxt context.Context) types.Repository[Post] {
 
 	if postRepository == nil {
-		postRepository = firestore.CreateRepository[Post](cxt, "hallix-blog", "Post")
+		postRepository, _ = firestore.CreateRepository[Post](cxt, "hallix-blog", "Post")
 	}
 
-	return &postRepository
+	return postRepository
 }
 ```
 
@@ -51,7 +51,7 @@ func GetRepository(cxt context.Context) *types.Repository[Post] {
 
 ##### Usage
 ```
-postRepository = *postrepository.GetRepository(cxt)
+postRepository = postrepository.GetRepository(cxt)
 postRepository.Save(post)
 ```
 
@@ -73,7 +73,7 @@ type service struct{}
 func GetService(cxt context.Context) PostService {
 
 	if postRepository == nil {
-		postRepository = *postrepository.GetRepository(cxt)
+		postRepository = postrepository.GetRepository(cxt)
 	}
 
 	return &service{}
