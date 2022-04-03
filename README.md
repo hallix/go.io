@@ -9,7 +9,7 @@ go.io is a library that provides easy to use APIs and other Go constructs for pe
 ### Examples
 #### Firestore
 
-1. Call your preferred persistance layer repository factory function which will return a Repository interface:
+1. Call your preferred persistance layer repository factory function which will return an implementation of the Repository interface:
 ##### Repository Interface
 ```
 type Repository[T any] interface {
